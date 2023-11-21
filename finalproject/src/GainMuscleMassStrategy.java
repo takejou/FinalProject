@@ -1,0 +1,40 @@
+public class GainMuscleMassStrategy implements DietStrategy {
+    private boolean motivationalSpeechEnabled = false;
+    private static final String[] MOTIVATIONAL_PHRASES = {
+            "Stay motivated! Keep working towards your weight gain goal!",
+            "Believe in yourself! You can achieve your weight gain target!",
+            "Persistence is key! Your efforts will pay off!",
+            "Keep pushing! Your journey to gaining weight is a step closer."
+    };
+
+    private int productCounter = 0;
+
+    @Override
+    public double calculateNutrients(String gender, int age, double weight, double height, double modificationPercentage) {
+        double calories = CalorieCalculator.calculateCalories(gender, age, weight, height);
+        double modifiedCalories = calories * (1.0 + Math.abs(modificationPercentage) / 100.0);
+
+        return modifiedCalories;
+    }
+
+    @Override
+    public void incrementProductCounter() {
+        productCounter++;
+    }
+
+    @Override
+    public String getRandomMotivationalSpeech() {
+        int randomIndex = (int) (Math.random() * MOTIVATIONAL_PHRASES.length);
+        return MOTIVATIONAL_PHRASES[randomIndex];
+    }
+
+    @Override
+    public String getDescription() {
+        return "Gain Muscle Mass Strategy";
+    }
+
+    @Override
+    public void setMotivationalSpeechEnabled(boolean motivationalSpeechEnabled) {
+        this.motivationalSpeechEnabled = motivationalSpeechEnabled;
+    }
+}
